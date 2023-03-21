@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+
+{% block title_of_page %}
+
+Delete Moment
+      
+{% endblock %}
+
+
+{% block content %}
+
+{% if user.is_authenticated  %}
+
+{% if user.id == 1 or user.id == x3.created_by.id %}
+
+<br/>
+
+<h1> Are you sure that you want to delete the moment named : {{x3.title_Of_Moment}} ?</h1>
+<br/>
+<div class="mb-3">
+<form method = "POST">
+	{% csrf_token %}
+	<button class ="btn btn-danger">Yes! Delete Moment!</button>
+	<br/>
+	<br/>
+	<a href = "{% url 'home' %}" class ="btn btn-danger"> No! Go Back To All Of My Moments! </a> 
+
+
+</div>
+
+{% else %}
+
+<h2> You are neither an admin or are {{x3.created_by.username}} so you are not able to delete this moment. </h2>
+
+{% endif %}
+
+{% else %}
+
+You need to sign in if you want to delete moments. 
+<br/><br/>
+<a href="{% url 'login' %}" class ="btn btn-danger btn"> Please Sign In If You Want To Delete Moments! </a>
+<br/><br/>
+
+<a href = "{% url 'sign_up' %}" class ="btn btn-danger"> Don't have an account? Go Create One! </a> 
+
+{% endif %}
+{% endblock %}

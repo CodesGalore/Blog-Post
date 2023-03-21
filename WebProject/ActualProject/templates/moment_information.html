@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title_of_page %}
+
+{{x2.title_Of_Moment}}
+
+{% endblock %}
+
+{% block content %}
+
+{% if user.is_authenticated  %}
+
+
+
+<h1> {{x2.title_Of_Moment}} </h1>
+
+
+<small> Made by: {{x2.created_by}} </small> <br/>
+
+<hr>
+<br/>
+
+{{x2.body_Text_Of_Moment}}
+
+<br/><br/>
+
+<small> Submitted on: {{x2.date_Of_Moment}} </small><br/>
+
+<br/>
+
+{% if user.id == 1 or user.id == x2.created_by.id %}
+
+<a href="{% url 'update_moment' x2.pk %}" class ="btn btn-warning btn"> Update Moment! </a>   <a href="{% url 'delete_moment' x2.pk %}" class ="btn btn-warning btn">    Delete Moment! </a>
+
+<br/><br/>
+
+{% endif %}
+
+<a href = "{% url 'home' %}" class ="btn btn-danger"> Back To My Other Moments </a>
+
+
+{% else %}
+
+You need to sign in if you want to view this page. 
+<br/><br/>
+<a href="{% url 'login' %}" class ="btn btn-danger btn"> Please Sign In If You Want to View This Page! </a>
+<br/><br/>
+
+<a href = "{% url 'sign_up' %}" class ="btn btn-danger"> Don't have an account? Go Create One! </a> 
+
+{% endif %}
+
+{% endblock %}
+
+

@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+
+{% block title_of_page %}
+
+All My Moments
+      
+{% endblock %}
+
+
+{% block content %}
+
+<br/>
+
+
+
+<h1> All My Moments </h1>
+<br/>
+
+<ul>
+
+{% for x in object_list %}
+	<li> <large> <a href="{% url 'moment-information' x.pk %}" class ="btn btn-danger btn-lg"> {{x.title_Of_Moment}} </a> </large> <br/> <br/>
+
+	{{x.body_Text_Of_Moment}}<br/><br/>
+
+	<p> Date created: {{x.date_Of_Moment}} <p> 
+
+	<p> Posted by: {{x.created_by}} </p>
+
+	<br/>
+
+
+	{% if user.is_authenticated  %}
+		{% if user.id == 1 or user.id == x.created_by.id %}
+
+	
+
+			<a href="{% url 'update_moment' x.pk %}" class ="btn btn-warning btn-sm"> Update Moment! </a>  <a href="{% url 'delete_moment' x.pk %}" class ="btn btn-warning btn-sm">    Delete Moment! </a>
+
+	
+
+
+			<br/><br/>
+
+			{% endif %}
+
+
+
+		{% endif %}
+	
+	</li>
+
+{% endfor %}
+
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+
+</ul>
+
+{% endblock %}

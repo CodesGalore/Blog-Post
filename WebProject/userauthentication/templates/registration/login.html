@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+
+{% block title_of_page %}
+
+Sign In
+      
+{% endblock %}
+
+
+{% block content %}
+
+<br/>
+
+<h1> Sign In</h1>
+<br/>
+<div class="mb-3">
+<form method = "POST">
+	{% csrf_token %}
+	{{form.as_p}}
+	<button class ="btn btn-danger">Sign Into Account!</button>
+
+	<br/>
+	<br/>
+
+	<a href = "{% url 'sign_up' %}" class ="btn btn-danger"> Don't have an account? Go Create One! </a> 
+
+	<br/>
+	<br/>
+
+	<a href="{% url 'password_reset' %}" class ="btn btn-danger">Forgot password? Click here!</a>
+
+
+</div>
+
+{% endblock %}

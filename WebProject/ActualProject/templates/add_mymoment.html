@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+
+{% block title_of_page %}
+
+Add A Moment
+      
+{% endblock %}
+
+
+{% block content %}
+
+<br/>
+
+
+{% if user.is_authenticated  %}
+
+<h1> Add A Momement to Your Moments Page!</h1>
+<br/>
+<div class="mb-3">
+<form method = "POST">
+	{% csrf_token %}
+	{{form.as_p}}
+	<button class ="btn btn-danger">Add This Moment!</button>
+
+
+</div>
+
+<script>
+	let creatorOfPost = "{{user.id}}";
+
+	document.getElementById('creator').value = creatorOfPost;
+
+</script>
+
+
+{% else %}
+
+You need to sign in if you want to add moments. 
+
+<a href="{% url 'login' %}" class ="btn btn-danger btn"> Please Sign In If You Want To Be Able To Add Moments! </a>
+<br/><br/>
+
+<a href = "{% url 'sign_up' %}" class ="btn btn-danger"> Don't have an account? Go Create One! </a> 
+
+{% endif %}
+
+{% endblock %}
